@@ -18,6 +18,8 @@ var outputCapitalize = capitalize("whoop")
 console.log(outputCapitalize); //----> "WHOOP";
 
 
+
+
 // 2. swapCase
 /*Ahora escribe una función llamada swapCase que tome una oración como string y
   retorne el string alternando una palabra en mayúsculas y otra en minúsculas
@@ -31,6 +33,8 @@ var swapCase = function(str) {
 
 var outputSwapCase = swapCase("hey gurl, lets javascript together sometime")
 console.log(outputSwapCase); //---> "HEY gurl, LETS javascript TOGETHER sometime"
+
+
 
 
 // 3. shiftLetter
@@ -50,6 +54,8 @@ var outputShiftLetters = shiftLetters('hello');
 console.log(outputShiftLetters); // ---> 'ifmmp'
 
 
+
+
 // 4. Even numbers
 //Manipula el siguiente array y devuelve un nuevo array que contenga solo a los números pares
 // ejem. evenNumber([1,2,3,4,5,6,7,8,9,10]) ---> [2, 4, 6, 8, 10]
@@ -62,8 +68,6 @@ var evenNumbers = function(array) {
 
 var outputEvenNumbers = evenNumbers(numberArray);
 console.log(outputEvenNumbers); // ---> [2, 4, 6, 8, 10]*/
-
-//Pares
 var numberArray = [1,2,3,4,5,6,7,8,9,10];
 function evenNumbers(array){
   return array % 2 === 0;
@@ -72,16 +76,24 @@ console.log(numberArray.filter(evenNumbers));
 
 
 
-// 5. Odd numbers
-//Ahora  manipulando el mismo array devuelve un nuevo array que contenga solo a los números impares.
-// ejem. oddNumbers([1,2,3,4,5,6,7,8,9,10]) ---> [1, 3, 5, 7, 9]
+/* 5. Odd numbers
+Ahora  manipulando el mismo array devuelve un nuevo array que contenga solo a los números impares.
+ ejem. oddNumbers([1,2,3,4,5,6,7,8,9,10]) ---> [1, 3, 5, 7, 9]
 
 var oddNumbers = function(array) {
-  //Escribe tu codigo aquí
+  Escribe tu codigo aquí
 };
 
 var outputOdd = oddNumbers(numberArray);
-console.log(outputOdd); // ---> [1, 3, 5, 7, 9]
+console.log(outputOdd); // ---> [1, 3, 5, 7, 9]*/
+
+//5.Impares
+var numberArray = [1,2,3,4,5,6,7,8,9,10];
+function evenNumbers(array){
+  return array % 2 !== 0;
+}
+console.log(numberArray.filter(evenNumbers));
+
 
 
 // 6. Reducer
@@ -94,7 +106,6 @@ Nota: Debes de hacer uso de las funciones de evenNumbers() y oddNumbers.*/
 
 /*var reducer = function() {
   //Escribe tu codigo aquí
-
 }
 
 var outputReducer = reducer([1,2,3,4,5,6,7,8,9]);
@@ -137,8 +148,6 @@ console.log(reduce);
   Apartir de este ejercicio te toca darle nombre y forma a tus funciones y sus respectivos outputs.
   ejem. output --> ['javascript', 'javascript', 'javascript']*/
 
-
-
 var persons = [
   {id : 1, name : "John", tags : "javascript"},
   {id : 2, name : "Alice", tags : "javascript"},
@@ -167,30 +176,15 @@ var mapArray = output.map(function(gatito){
 console.log(mapArray);
 
 
-/*sin concatenar
-var personJavaScript = function(array){
-  var nuevoArray = array.filter(function(perrito){
-    return perrito.tags === "javascript"; // si cumple esta condicion metelo al nuevoArray
-    //console.log(perrito.tags);
-  })
-    //console.log(nuevoArray);
-    return nuevoArray;
-}
-var output =personJavaScript(persons);
-console.log(output);
-
-//Para obtener array con javascript. Puede ser output o nuevoArray
-var mapArray = output.map(function(gatito){
-  //console.log(gatito);
-  return gatito.tags
-})
-console.log(mapArray);*/
 
 //No
 //var personJavaScript = persons.filter(function(array){
   //return array.tags
 //})
 //console.log(personJavaScript);
+
+
+
 // 8. Render in DOM
 /*Usando la data anterior y alguno de los métodos, pinta en el index.html a través del DOM
  cada una de las personas y todas sus propiedades */
@@ -260,12 +254,48 @@ var data = [
   },
 ];
 
+
+var onlyDogs = function(array){
+  var dogsArray = array.filter(function(perrito){
+    return perrito.type === "dog";
+  });
+  return dogsArray;
+};
+var output = onlyDogs(data);
+
+var mapDogsAge = output.map (function(array){
+  return array.age *7;
+});
+console.log(mapDogsAge);
+
+var reducer = mapDogsAge.reduce(function(valorAnterior, valorActual){
+  return valorAnterior + valorActual;
+});
+console.log(reducer);
+
+
+
 // 10. Render in DOM
 /*Usando la data anterior y alguno de los métodos, pinta en el index.html a través del DOM
  cada una de las mascotas junto con todas su propiedades*/
-
  var paintPets = function(array) {
-
+   var contenedor = document.getElementById("container");
+   //Funcion forEach
+   array.forEach(function(elemento){
+     var animal = document.createElement("div");
+     var name = document.createElement("h2");
+     var age = document.createElement("p");
+     var type = document.createElement("p");
+     //Agregar texto
+     name.innerText = elemento.name;
+     age.innerText = elemento.age;
+     type.innerText = elemento.type;
+     //Agregar al html
+     animal.appendChild(name);
+     animal.appendChild(age);
+     animal.appendChild(type);
+     contenedor.appendChild(animal);
+   })
  };
 
 var outputPaintPets = paintPets(data);
